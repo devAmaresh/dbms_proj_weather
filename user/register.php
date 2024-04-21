@@ -42,6 +42,7 @@ if (isset($_POST['register']) && !empty($_POST['name']) && !empty($_POST['email'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../src/output.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="p-0 m-0">
