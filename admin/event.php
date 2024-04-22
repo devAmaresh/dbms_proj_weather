@@ -18,12 +18,30 @@ if (isset($_POST['set_alert'])) {
     $query = "INSERT INTO weatherevents (location_id, event_type, event_timestamp, severity_level, description) VALUES ('$location_id', '$event_type', '$event_timestamp', '$severity_level', '$alert_message')";
     if (mysqli_query($conn, $query)) {
         echo "<script>alert('Alert set successfully');</script>";
+
+        // Get pincode of the added location
+        $pincode_query = "SELECT pincode FROM Locations WHERE location_id = '$location_id'";
+        $pincode_result = mysqli_query($conn, $pincode_query);
+        $pincode_row = mysqli_fetch_assoc($pincode_result);
+        $pincode = $pincode_row['pincode'];
+
+        // Query users with matching pincode
+        $user_query = "SELECT * FROM users WHERE pincode = '$pincode'";
+        $user_result = mysqli_query($conn, $user_query);
+
+        // Insert notifications for matching users
+        while ($user_row = mysqli_fetch_assoc($user_result)) {
+            $user_id = $user_row['user_id'];
+            $insert_notification_query = "INSERT INTO notifications (user_id, event_id, is_read) VALUES ('$user_id', LAST_INSERT_ID(), '0')";
+            mysqli_query($conn, $insert_notification_query);
+        }
     } else {
         echo "<script>alert('Error setting alert');</script>";
     }
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
