@@ -22,13 +22,28 @@ if (isset($_POST['add_location'])) {
 }
 if (isset($_POST['delete_location'])) {
     $location_id = $_POST['location_id'];
-    $query = "DELETE FROM Locations WHERE location_id = '$location_id'";
-    if (mysqli_query($conn, $query)) {
-        echo "<script>alert('Location deleted successfully');</script>";
+
+    // Check if there are any related entries in the weatherevents table
+    $check_sql = "SELECT * FROM weatherevents WHERE location_id = '$location_id'";
+    $check_result = mysqli_query($conn, $check_sql);
+
+    // If there are related entries, inform the user and prevent deletion
+    if (mysqli_num_rows($check_result) > 0) {
+        echo "<script>alert('Cannot delete location due to related weather events.');</script>";
     } else {
-        echo "<script>alert('Error deleting location');</script>";
+        // If no related entries, proceed with deletion
+        $query = "DELETE FROM Locations WHERE location_id = '$location_id'";
+        if (mysqli_query($conn, $query)) {
+            echo "<script>alert('Location deleted successfully');</script>";
+        } else {
+            $error_message = mysqli_error($conn);
+            echo "<script>alert('Error deleting location: " . $error_message . "');</script>";
+        }
     }
+    // Reload the page
+    echo "<script>window.location.href = window.location.href;</script>";
 }
+
 
 // Fetch all locations from the database
 $query = "SELECT * FROM Locations";
