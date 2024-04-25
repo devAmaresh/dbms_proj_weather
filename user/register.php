@@ -5,11 +5,12 @@ if (isset($_SESSION['isLoggedU']) && $_SESSION['isLoggedU'] === true) {
     header("Location: dashboard.php");
     exit;
   }
-if (isset($_POST['register']) && !empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['cpassword'])) {
+if (isset($_POST['register']) && !empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['cpassword'])&& !empty($_POST['pincode'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $cpassword = $_POST['cpassword'];
+    $pincode = $_POST['pincode'];
     if ($password != $cpassword) {
         echo "<script>alert('Password does not match');</script>";
     } else {
@@ -19,7 +20,7 @@ if (isset($_POST['register']) && !empty($_POST['name']) && !empty($_POST['email'
             echo "<script>alert('User already exists');</script>";
         }
         else{
-        $query = "INSERT INTO users (name,email, password) VALUES ('$name','$email', '$password')";
+        $query = "INSERT INTO users (name,email, password,pincode) VALUES ('$name','$email', '$password','$pincode')";
         if (mysqli_query($conn, $query)) {
             echo "<script>alert('User registered successfully ..Kindly login');</script>";
 
@@ -67,6 +68,13 @@ if (isset($_POST['register']) && !empty($_POST['name']) && !empty($_POST['email'
                     <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Full Name</label>
                     <div class="mt-2">
                         <input id="name" name="name" type="text" required
+                            class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+                <div>
+                    <label for="pincode" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                    <div class="mt-2">
+                        <input id="pincode" name="pincode" type="number" required
                             class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
