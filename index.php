@@ -1,3 +1,6 @@
+<?php
+echo "<script>location.href='http://localhost:3000'</script>";
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./src/output.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-gray-100 p-0 m-0">
     <nav
@@ -14,14 +18,15 @@
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
       >
         <a
-          href="index.html"
+          href="index.php"
           class="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img
-            src="https://c4.wallpaperflare.com/wallpaper/528/819/646/earth-space-art-neil-degrasse-tyson-quote-wallpaper-preview.jpg"
+            src=""
             class="h-8 rounded-full w-12 object-cover"
             alt="Flowbite Logo"
           />
+          <Avatar alt="Remy Sharp" src="https://c4.wallpaperflare.com/wallpaper/528/819/646/earth-space-art-neil-degrasse-tyson-quote-wallpaper-preview.jpg" />
           <span
             class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
             >Flowbite</span
