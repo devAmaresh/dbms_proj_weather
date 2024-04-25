@@ -21,7 +21,7 @@ $pincode = $row['pincode'];
     <div class="col-span-3"></div>
     <!-- write the content here -->
     <div class="col-span-9 pt-2">
-        <div class="text-center font-bold">Welcome <?php echo $_SESSION['user_name']?></div>
+        <div class="text-center font-bold text-blue-400 text-2xl">Welcome <?php echo $_SESSION['user_name']?></div>
         <!-- Display weather information here -->
         <div id="weather" class="mt-8"></div>
     </div>
@@ -29,6 +29,7 @@ $pincode = $row['pincode'];
 
 <!-- Link the JavaScript file -->
 <script src="helper/weather.js"></script>
+
 <script>
     // Call fetchWeather function with the user's pincode
     fetchWeather('<?php echo $pincode; ?>');
