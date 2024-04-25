@@ -1,22 +1,22 @@
 <?php
-include("dbconnection.php");
+include ("dbconnection.php");
 session_start();
 if (isset($_SESSION['isLoggedU']) && $_SESSION['isLoggedU'] === true) {
   header("Location: dashboard.php");
   exit;
 }
-if(isset($_POST['login'])){
+if (isset($_POST['login'])) {
   $email = $_POST['email'];
   $password = $_POST['password'];
   $query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
   $result = mysqli_query($conn, $query);
-  if(mysqli_num_rows($result) > 0){
+  if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
     $_SESSION['user_id'] = $row['user_id'];
     $_SESSION['user_name'] = $row['name'];
     $_SESSION['isLoggedU'] = true;
     header("Location: dashboard.php");
-  }else{
+  } else {
     echo "<script>alert('Invalid email or password');</script>";
   }
 }
@@ -34,9 +34,9 @@ if(isset($_POST['login'])){
 </head>
 
 <body class="p-0 m-0">
-  <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="flex min-h-full flex-col justify-center px-6 py-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+      <img class="mx-auto h-10 w-auto" src="https://m.media-amazon.com/images/I/61nuuPxUvaL.png"
         alt="Your Company">
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account
       </h2>
@@ -71,9 +71,14 @@ if(isset($_POST['login'])){
             value="Sign in">
         </div>
       </form>
-      <div class="mt-5 text-zinc-500 underline underline-offset-2 text-semibold text-center"><a href="register.php">I don't have an account</a>
+      <div class="mt-5 text-zinc-500 underline underline-offset-2 text-semibold text-center"><a href="register.php">I
+          don't have an account</a>
+        <div class="mt-5 text-zinc-500 underline underline-offset-2 text-semibold text-center"><a
+            href="http://localhost:3000">
+            Back To Home</a>
+        </div>
+      </div>
     </div>
-  </div>
 
 
 </body>

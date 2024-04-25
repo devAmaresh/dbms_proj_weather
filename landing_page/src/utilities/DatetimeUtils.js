@@ -37,10 +37,10 @@ export function getUTCDatetime() {
     hour: '2-digit',
     minute: '2-digit',
     hourCycle: 'h23',
-    timeZone: 'UTC',
+    timeZone: 'Asia/Kolkata',
   });
 
-  const isoDateString = new Date().toISOString();
+  const isoDateString = new Date().toLocaleDateString();
   const utcDate = isoDateString.split('T')[0].concat(' ', utcTime);
   return utcDate;
 }
@@ -51,7 +51,7 @@ export function getUTCTime() {
     minute: '2-digit',
     second: '2-digit',
     hourCycle: 'h23',
-    timeZone: 'UTC',
+    timeZone: 'Asia/Kolkata',
   });
 
   return utcTime;

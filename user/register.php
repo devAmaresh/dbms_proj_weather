@@ -5,6 +5,17 @@ if (isset($_SESSION['isLoggedU']) && $_SESSION['isLoggedU'] === true) {
     header("Location: dashboard.php");
     exit;
   }
+  function getAllPinCodes($conn) {
+    $query = "SELECT DISTINCT pincode FROM locations";
+    $result = mysqli_query($conn, $query);
+
+    $pinCodes = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $pinCodes[] = $row['pincode'];
+    }
+    return $pinCodes;
+}
+
 if (isset($_POST['register']) && !empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['cpassword'])&& !empty($_POST['pincode'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -25,6 +36,7 @@ if (isset($_POST['register']) && !empty($_POST['name']) && !empty($_POST['email'
             echo "<script>alert('User registered successfully ..Kindly login');</script>";
 
             header("Location: login.php");
+            exit();
         } else {
             header("Location: register.php");
             echo "<script>alert('User registration unsuccessfull');</script>";
@@ -47,9 +59,9 @@ if (isset($_POST['register']) && !empty($_POST['name']) && !empty($_POST['email'
 </head>
 
 <body class="p-0 m-0">
-    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="flex min-h-full flex-col justify-center px-6 py-8 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            <img class="mx-auto h-10 w-auto" src="https://m.media-amazon.com/images/I/61nuuPxUvaL.png"
                 alt="Your Company">
             <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign Up to start
             </h2>
@@ -72,11 +84,21 @@ if (isset($_POST['register']) && !empty($_POST['name']) && !empty($_POST['email'
                     </div>
                 </div>
                 <div>
-                    <label for="pincode" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                    <label for="pincode" class="block text-sm font-medium leading-6 text-gray-900">Pincode</label>
                     <div class="mt-2">
-                        <input id="pincode" name="pincode" type="number" required
-                            class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <select id="pincode" name="pincode" required
+                            class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option value="" selected disabled>Select Pincode</option>
+                            <?php
+                            // Fetch all pin codes and populate dropdown
+                            $pinCodes = getAllPinCodes($conn);
+                            foreach ($pinCodes as $pin) {
+                                echo "<option value='$pin'>$pin</option>";
+                            }
+                            ?>
+                        </select>
                     </div>
+    
                 </div>
                 <div>
                     <div class="flex items-center justify-between">
@@ -105,6 +127,9 @@ if (isset($_POST['register']) && !empty($_POST['name']) && !empty($_POST['email'
             </form>
             <div class="mt-5 text-zinc-500 underline underline-offset-2 text-semibold text-center"><a href="login.php">I
                     already have an account</a>
+            </div>
+            <div class="mt-5 text-zinc-500 underline underline-offset-2 text-semibold text-center"><a href="http://localhost:3000">
+                    Back To Home</a>
             </div>
         </div>
     </div>

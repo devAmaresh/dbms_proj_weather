@@ -70,7 +70,7 @@ if(isset($_POST['login'])){
             value="Sign in">
         </div>
       </form>
-      <div class="mt-5 text-zinc-500 underline underline-offset-2 text-semibold text-center"><a href="../index.html">Back to Home</a>
+      <div class="mt-5 text-zinc-500 underline underline-offset-2 text-semibold text-center"><a href="../index.php">Back to Home</a>
     </div>
   </div>
 
