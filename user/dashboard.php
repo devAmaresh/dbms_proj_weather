@@ -6,6 +6,17 @@ $sql = "SELECT * FROM users WHERE user_id = " . $_SESSION['user_id'];
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $pincode = $row['pincode'];
+$sql = "SELECT * FROM locations WHERE pincode = '$pincode'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+
+if ($row) {
+    $latitude = $row['latitude'];
+    $longitude = $row['longitude'];
+} else {
+    $latitude = 20.5937;
+    $longitude = 78.9629;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,23 +77,23 @@ $pincode = $row['pincode'];
     // Call fetchWeather function with the user's pincode
     fetchWeather('<?php echo $pincode; ?>');
 </script>
-
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-    var map = L.map('map').setView([20.5937, 78.9629], 10);
+    var map = L.map('map').setView([<?php echo $latitude; ?>, <?php echo $longitude; ?>], 10);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
     }).addTo(map);
-    var marker = L.marker([20.5937, 78.9629]).addTo(map);
+    var marker = L.marker([<?php echo $latitude; ?>, <?php echo $longitude; ?>]).addTo(map);
 
     // Update marker position based on pincode
     var geocoder = L.Control.Geocoder.nominatim();
     geocoder.geocode('<?php echo $pincode; ?>, India', function(results) {
         if (results.length > 0) {
-            map.setView([results[0].center.lat, results[0].center.lng], 12);
-            marker.setLatLng([results[0].center.lat, results[0].center.lng]);
+            map.setView([<?php echo $latitude; ?>, <?php echo $longitude; ?>], 12);
+            marker.setLatLng([<?php echo $latitude; ?>, <?php echo $longitude; ?>]);
         }
     });
+
 </script>
 </body>
 </html>
