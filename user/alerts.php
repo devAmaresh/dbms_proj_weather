@@ -43,7 +43,7 @@ $result = mysqli_query($conn, $query);
   <div class="col-span-3"></div>
   <div class="col-span-9 pt-2 pr-10">
    <h2 class="text-center text-2xl font-bold p-5 pl-0">Alerts</h2>
-   <table class="border-collapse border-2 border-gray-400  ">
+   <table class="border-collapse border-2 border-gray-500  ">
     <thead>
      <tr>
       <th class="border border-gray-400 px-4 py-2">SL No</th>
