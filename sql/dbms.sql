@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2024 at 07:27 PM
+-- Generation Time: Apr 26, 2024 at 06:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,31 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `name`, `email`, `password`, `created_at`) VALUES
-(1, 'Cool boy djeck', 'admin@gmail.com', '123', '2024-04-21 01:50:51');
+(1, 'ADMIN1', 'admin@gmail.com', '123', '2024-04-21 01:50:51'),
+(2, 'ADMIN2', 'admin2@gmail.com', '123', '2024-04-21 01:50:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `email`, `subject`, `message`, `created_at`) VALUES
+(1, 'amprasad.2003@gmail.com', 'hello i want a map of upcoming torandos in sahara', 'do it asap', '2024-04-25 21:24:33'),
+(3, 'amprasad.2003@gmail.com', 'hello i want a globe', 'do it asap', '2024-04-25 21:24:33'),
+(4, 'amprasad.2003@gmail.com', 'hello i want a map of upcoming torandos in sahara', 'do it asap', '2024-04-25 21:24:33');
 
 -- --------------------------------------------------------
 
@@ -64,7 +88,15 @@ INSERT INTO `locations` (`location_id`, `location_name`, `latitude`, `longitude`
 (20, 'Sitapur, Barelipar, Chaurai Tahsil, Chhindwara District, Madhya Pradesh, 480115, India', 22.02454560, 79.25330433, '480115'),
 (22, 'SH11, Krishnajiwada, Tadwai mandal, Kamareddy District, Telangana, 503110, India', 18.31281085, 78.26130039, '503110'),
 (25, 'Kanpur, Kanpur Nagar District, Uttar Pradesh, 208014, India', 26.43614692, 80.32466468, '208014'),
-(26, 'MDR206, Behror Jat, Behror Tehsil, Kotputli-Behror District, Rajasthan, 301020, India', 27.89128057, 76.37056405, '301020');
+(26, 'MDR206, Behror Jat, Behror Tehsil, Kotputli-Behror District, Rajasthan, 301020, India', 27.89128057, 76.37056405, '301020'),
+(27, 'Tulsi Nagar, Bhopal, Huzur Tahsil, Bhopal District, Madhya Pradesh, 462001, India', 23.23125092, 77.40260144, '462001'),
+(28, 'Khilwat road, Ghansi Bazaar, Ward 49 Ghansi Bazar, Greater Hyderabad Municipal Corporation South Zone, Hyderabad, Bahadurpura mandal, Hyderabad District, Telangana, 500002, India', 17.36046913, 78.47151392, '500002'),
+(29, 'Kali Prasad College, Hamilton Road, George Town, Prayagraj, Prayagraj District, Uttar Pradesh, 211001, India', 25.44327461, 81.85329233, '211001'),
+(30, 'Mehrauli Badarpur Road, Pushp Vihar, Sector 2, Hauz Khas Tehsil, South Delhi District, Delhi, 110062, India', 28.51696944, 77.21992992, '110062'),
+(31, 'Newa - Punpun Road, Sampatchak, Patna District, Bihar, India', 25.48295118, 85.17662851, '800008'),
+(32, 'Clive Row, Tiretta Bazaar, Bara Bazar, Kolkata, Kolkata District, West Bengal, 700007, India', 22.57851049, 88.35010191, '700007'),
+(33, '2nd Main Road, Ramachandra Pura, Sriramapura, Bengaluru, Bangalore North, Bengaluru Urban, Karnataka, 560001, India', 12.98850040, 77.56053967, '560001'),
+(34, 'Laxmi Vilas Rao Palace, Dandia Bazaar Road, Nava Bazaar, Vadodara, Vadodara Rural Taluka, Vadodara District, Gujarat, 390001, India', 22.29417905, 73.19359469, '390001');
 
 -- --------------------------------------------------------
 
@@ -110,7 +142,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `created_at`, `last_login`, `pincode`) VALUES
-(3, 'ram', 'ram@gmail.com', '123', '2024-04-21 01:42:11', NULL, '480115');
+(3, 'ram', 'ram@gmail.com', '123', '2024-04-21 01:42:11', NULL, '480115'),
+(7, 'Manoj', 'a@gmail.com', '123', '2024-04-26 05:11:38', '2024-04-26 05:11:38', '390001');
 
 -- --------------------------------------------------------
 
@@ -156,6 +189,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`);
 
 --
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `locations`
 --
 ALTER TABLE `locations`
@@ -190,13 +229,19 @@ ALTER TABLE `weatherevents`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -208,7 +253,7 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `weatherevents`
